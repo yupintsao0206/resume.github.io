@@ -1,108 +1,101 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>曹祐彬 (TSAO, YU-PIN) | 總覽首頁</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .card-link { transition: transform 0.2s, box-shadow 0.2s; }
-        .card-link:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>曹祐彬 (TSAO, YU-PIN) | 個人簡介</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .section-title { position: relative; margin-bottom: 1.5rem; padding-bottom: 0.5rem; }
+        .section-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 3px; background-color: #3b82f6; border-radius: 2px; }
+        .active-link { background-color: #bfdbfe; border-left: 4px solid #3b82f6; font-weight: 600; }
+        
+        /* --- 漢堡選單樣式 START --- */
+        #menu-toggle { display: none; }
+        #sidebar-menu {
+            position: fixed; top: 0; left: 0; width: 300px; height: 100vh; z-index: 50;
+            transform: translateX(-100%); transition: transform 0.3s ease-in-out;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); padding-top: 5rem;
+        }
+        #menu-toggle:checked ~ #sidebar-menu { transform: translateX(0); }
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);
+            z-index: 40; opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        #menu-toggle:checked ~ #overlay { opacity: 1; visibility: visible; }
+        .menu-button { position: fixed; top: 1.5rem; left: 1.5rem; z-index: 60; cursor: pointer; }
+        .content-wrap { transition: transform 0.3s ease-in-out; }
+        #menu-toggle:checked ~ .content-wrap { transform: translateX(300px); }
+        /* --- 漢堡選單樣式 END --- */
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
 
-    <div class="max-w-6xl mx-auto p-4 sm:p-8 lg:p-12">
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-button bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition duration-200">
+        <i class="fas fa-bars text-xl"></i>
+    </label>
 
-        <header class="bg-white shadow-xl rounded-2xl p-8 md:p-12 mb-12 text-center">
-            
-            <div class="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full shadow-lg border-4 border-blue-100">
-                <img src="./IMG_4873.jpg" alt="曹祐彬 (TSAO, YU-PIN) 個人照片" class="w-full h-full object-cover">
-            </div>
+    <nav id="sidebar-menu" class="bg-white p-6 rounded-r-2xl shadow-xl">
+        <h3 class="font-bold text-lg mb-4 border-b pb-2">網站導航</h3>
+        <ul class="space-y-1">
+            <a href="index.html" class="block p-3 rounded-lg text-gray-700 hover:bg-gray-100"><i class="fas fa-home w-5 mr-2 text-gray-500"></i> 總覽首頁</a>
+            <a href="profile.html" class="block p-3 rounded-lg text-gray-700 hover:bg-gray-100 active-link"><i class="fas fa-user-circle w-5 mr-2 text-blue-500"></i> 個人簡介</a>
+            <a href="education.html" class="block p-3 rounded-lg text-gray-700 hover:bg-gray-100 "><i class="fas fa-graduation-cap w-5 mr-2 text-green-500"></i> 教育背景</a>
+            <a href="experience.html" class="block p-3 rounded-lg text-gray-700 hover:bg-gray-100 "><i class="fas fa-flask w-5 mr-2 text-red-500"></i> 研究與經歷</a>
+            <a href="awards.html" class="block p-3 rounded-lg text-gray-700 hover:bg-gray-100 "><i class="fas fa-trophy w-5 mr-2 text-yellow-500"></i> 榮譽與獎項</a>
+            <a href="skills.html" class="block p-3 rounded-lg text-gray-700 hover:bg-gray-100 "><i class="fas fa-language w-5 mr-2 text-purple-500"></i> 語言與技能</a>
+            <a href="tutoring.html" class="block p-3 rounded-lg text-gray-700 hover:bg-gray-100 "><i class="fas fa-chalkboard-teacher w-5 mr-2 text-orange-500"></i> 家教服務</a>
+        </ul>
+        <label for="menu-toggle" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl cursor-pointer">
+            <i class="fas fa-times"></i>
+        </label>
+    </nav>
+    
+    <label for="menu-toggle" id="overlay"></label>
 
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">
-                曹祐彬 <span class="text-gray-500 text-3xl">(TSAO, YU-PIN)</span>
-            </h1>
-            <p class="text-xl md:text-2xl font-semibold text-blue-600 mb-4">
-                國立臺灣大學醫學系學生 | 研究與跨域創新者
-            </p>
+    <div class="content-wrap">
+        <div class="max-w-6xl mx-auto p-4 sm:p-8 lg:p-12">
 
-            <div class="flex flex-wrap justify-center items-center space-x-6 text-base md:text-lg mb-4">
-                <a href="https://www.facebook.com/cao.you.bin.2025" target="_blank" class="text-blue-700 hover:text-blue-900 transition duration-200" title="Facebook">
-                    <i class="fab fa-facebook-square mr-1"></i> Facebook
-                </a>
-                
-                <a href="https://line.me/ti/p/mRv4mfYe_y" target="_blank" class="text-green-600 hover:text-green-800 transition duration-200" title="Line">
-                    <i class="fab fa-line mr-1"></i> LINE
-                </a>
-
-                <a href="mailto:yupintsao0206@gmail.com" class="text-red-600 hover:text-red-800 transition duration-200 block mt-2 md:mt-0" title="Email (Gmail)">
-                    <i class="fas fa-envelope mr-1"></i> yupintsao0206@gmail.com
-                </a>
-                
-                <a href="mailto:b13401116@ntu.edu.tw" class="text-red-600 hover:text-red-800 transition duration-200 block mt-2 md:mt-0" title="Email (NTU)">
-                    <i class="fas fa-envelope mr-1"></i> b13401116@ntu.edu.tw
-                </a>
-            </div>
+            <header class="bg-white shadow-xl rounded-2xl p-6 md:p-10 mb-12 flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-10 pt-16 md:pt-0">
+                <div class="flex-shrink-0 w-40 h-40 md:w-56 md:h-56 overflow-hidden rounded-full shadow-lg border-4 border-blue-100">
+                    <img src="./IMG_4873.jpg" alt="曹祐彬 (TSAO, YU-PIN) 個人照片" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-grow text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">
+                        曹祐彬 <span class="text-gray-500 text-3xl">(TSAO, YU-PIN)</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl font-semibold text-blue-600 mb-4">
+                        國立臺灣大學醫學系學生 | 研究與跨域創新者
+                    </p>
+                    <div class="space-y-2 text-gray-600">
+                        <p><i class="fas fa-graduation-cap text-blue-400 w-5 mr-2"></i> 國立臺灣大學 醫學系</p>
+                        <p><i class="fas fa-envelope text-blue-400 w-5 mr-2"></i> b13401116@ntu.edu.tw / yupintsao0206@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt text-blue-400 w-5 mr-2"></i> 臺灣 臺北</p>
+                    </div>
+                </div>
             </header>
 
-        <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <main class="space-y-12">
+                
+                <section class="bg-white p-8 rounded-2xl shadow-lg">
+                    <h2 class="section-title text-3xl font-bold text-blue-600"><i class="fas fa-user-circle mr-3"></i>個人簡介 (Profile Summary)</h2>
+                    <div class="space-y-4 text-lg text-gray-700">
+                        <p>我是曹祐彬，目前就讀於國立臺灣大學醫學系。我的學術興趣橫跨醫學、心理學與跨域創新。</p>
+                        <p>在高中的研究期間，我專注於神經科學與精神醫學領域，特別是在「腺苷調節劑治療精神分裂症與壓力相關疾病」的研究中，榮獲了國際科學與工程展覽（ISEF）- 美國心理學會傑出研究獎第三名，展現了我在跨領域研究方面的潛力。</p>
+                        <p>除了學術研究，我積極參與校內外的領導與志工活動，包括擔任臺大衝浪社財務長、參與ATCC全國商業個案大賽，並在臺大醫院精神科擔任復健日間病房志工，以期將醫學知識與社會服務結合。</p>
+                        <p>我熱衷於不斷學習和探索新知，致力於將嚴謹的科學方法應用於解決複雜的健康和社會問題，並期待在未來的醫學研究和臨床實踐中，成為一位具備全球視野和創新思維的醫者。</p>
+                    </div>
+                </section>
 
-            <a href="profile.html" class="card-link bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-500 flex items-center space-x-4">
-                <i class="fas fa-user-circle text-3xl text-blue-500"></i>
-                <div>
-                    <h3 class="font-bold text-xl text-gray-900">個人簡介</h3>
-                    <p class="text-gray-500">Profile Summary</p>
-                </div>
-            </a>
+            </main>
+                
+            <footer class="mt-12 text-center text-sm text-gray-500 border-t pt-6">
+            <p>最後更新：2025 年 11 月</p>
+            </footer>
 
-            <a href="education.html" class="card-link bg-white p-6 rounded-xl shadow-lg border-t-4 border-green-500 flex items-center space-x-4">
-                <i class="fas fa-graduation-cap text-3xl text-green-500"></i>
-                <div>
-                    <h3 class="font-bold text-xl text-gray-900">教育背景</h3>
-                    <p class="text-gray-500">Education</p>
-                </div>
-            </a>
-
-            <a href="experience.html" class="card-link bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-500 flex items-center space-x-4">
-                <i class="fas fa-flask text-3xl text-red-500"></i>
-                <div>
-                    <h3 class="font-bold text-xl text-gray-900">研究與經歷</h3>
-                    <p class="text-gray-500">Appointments and Experience</p>
-                </div>
-            </a>
-
-            <a href="awards.html" class="card-link bg-white p-6 rounded-xl shadow-lg border-t-4 border-yellow-500 flex items-center space-x-4">
-                <i class="fas fa-trophy text-3xl text-yellow-500"></i>
-                <div>
-                    <h3 class="font-bold text-xl text-gray-900">榮譽與獎項</h3>
-                    <p class="text-gray-500">Awards</p>
-                </div>
-            </a>
-
-            <a href="skills.html" class="card-link bg-white p-6 rounded-xl shadow-lg border-t-4 border-purple-500 flex items-center space-x-4">
-                <i class="fas fa-language text-3xl text-purple-500"></i>
-                <div>
-                    <h3 class="font-bold text-xl text-gray-900">語言與技能</h3>
-                    <p class="text-gray-500">Skills & Media</p>
-                </div>
-            </a>
-            
-            <a href="tutoring.html" class="card-link bg-white p-6 rounded-xl shadow-lg border-t-4 border-orange-500 flex items-center space-x-4">
-                <i class="fas fa-chalkboard-teacher text-3xl text-orange-500"></i>
-                <div>
-                    <h3 class="font-bold text-xl text-gray-900">家教服務</h3>
-                    <p class="text-gray-500">Tutoring Service</p>
-                </div>
-            </a>
-            
-        </main>
-        
-        <footer class="mt-12 text-center text-sm text-gray-500 border-t pt-6">
-            <p>最後更新：2025 年 11 月</p>
-        </footer>
-
+        </div>
     </div>
 </body>
 </html>
